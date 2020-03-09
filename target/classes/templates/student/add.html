@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
+<html>
+<head><title>Add a Student</title></head>
+<body>
+<form action="add" method="post">
+    <table>
+        <tr>
+            <td>Student Number:</td>
+            <td><input type="text" name="studentNumber" value="${student.studentNumber}" /> </td>
+        </tr>
+        <tr>
+            <td>First Name:</td>
+            <td><input type="text" name="firstName" value="${student.firstName}" /> </td>
+        </tr>
+        <tr>
+            <td>Middle Name:</td>
+            <td><input type="text" name="middleName" value="${student.middleName}" /> </td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td><input type="text" name="lastName" value="${student.lastName}" /> </td>
+        </tr>
+        <tr>
+            <td>cgpa:</td>
+            <td><input type="double" name="cgpa" value="${student.cgpa}" /> </td>
+        </tr>
+<!--        <tr>-->
+<!--            <td>Date of enrollment:</td>-->
+<!--            <td><input type="datetime-local" name="dateOfEnrollment" value="${student.dateOfEnrollment}" /> </td>-->
+<!--        </tr>-->
+
+    </table>
+    <input type="submit" value="update"/>
+</form>
+<form action="delete?carId=${car.id}" method="post">
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>
