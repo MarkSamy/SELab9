@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -62,4 +60,15 @@ public class StudentController {
         studentService.addStudent(student);
         return "redirect:/eregister/student/list";
     }
+    @GetMapping(value = {"/eregister/student/search"})
+    public ModelAndView searchStudents(@RequestParam String searchString) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Student> students = studentService.searchStudents(searchString);
+        modelAndView.addObject("students", students);
+        modelAndView.addObject("searchString", searchString);
+        modelAndView.addObject("studentsCount", students.size());
+        modelAndView.setViewName("student/list");
+        return modelAndView;
+    }
+
 }

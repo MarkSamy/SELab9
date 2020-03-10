@@ -37,6 +37,19 @@
                 <a class="btn btn-outline-success btn-lg" href="/eregister/student/add">Add New Student</a>
             </span>
     </div>
+    <form id="searchBookForm" method="get" action="/eregister/student/search">
+        <div style="margin-top:1em;" class="row">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchString" name="searchString" placeholder="Enter a string to search for students"
+                           th:value="${searchString}" autofocus />
+                    <div class="input-group-append">
+                        <button id="btnSubmit" type="submit" class="btn btn-outline-success">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <p>&nbsp;</p>
     <div style="font-size: 1em">
