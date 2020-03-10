@@ -3,6 +3,8 @@ package com.miu.register.demo.model;
 
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -28,15 +30,27 @@ public class Student {
     @Column(name="cgpa")
     private double cgpa;
     @Column(name="dateOfEnrollment")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfEnrollment;
     @Column(name = "isInternational")
-    private boolean isInternational;
-    public Student() {
+    private option isInternational;
+
+    public option getIsInternational() {
+        return isInternational;
     }
 
+    public void setIsInternational(option isInternational) {
+        this.isInternational = isInternational;
+    }
+
+    public Student() {
+    }
+    enum option {
+        YES,NO
+    }
 
     public Student(String studentNumber, String firstName, String middleName, String lastName, double cgpa, LocalDate dateOfEnrollment,
-                   boolean isInternational) {
+                   option isInternational) {
         this.studentNumber = studentNumber;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -102,13 +116,6 @@ public class Student {
         this.dateOfEnrollment = dateOfEnrollment;
     }
 
-    public boolean isInternational() {
-        return isInternational;
-    }
-
-    public void setInternational(boolean international) {
-        isInternational = international;
-    }
 
     @Override
     public String toString() {

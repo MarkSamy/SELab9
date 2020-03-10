@@ -9,7 +9,7 @@
     <link rel="icon" href="favicon.ico">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
-    <studentNumber>eregister - system</studentNumber>
+    <title>eregister - </title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -22,19 +22,22 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
-                <a class="nav-link" href="/eregister/student/list">Students</a>
+                <a class="nav-link" href="/eregister/student/list">students</a>
             </li>
         </ul>
-
+        <form class="form-inline my-2 my-lg-0">
+<!--            <span style="color:#fff;padding-left: 2em; padding-right: 1em;">Welcome, Guest</span>-->
+            <!--<a style="color: #ffffff; margin-right: 0em;" class="nav-link" href="#">John Doe</a>-->
+            <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+<!--            <a href="#" class="btn btn-secondary">Sign In</a>-->
+        </form>
     </div>
 </nav>
 
 <div style="padding-top:1em;" class="container">
-    <div style="margin-bottom: 1em;">
-        <span style="font-size: 2em; color: #32a5e7;">New Student</span>
-    </div>
 
-    <form id="newBookForm" method="post" action="/eregister/student/add" th:object="${student}">
+
+    <form id="editBookForm" method="post" action="/eregister/student/edit" th:object="${student}">
         <fieldset>
             <input type="hidden" name="id" th:value="${student.id}"/>
 
@@ -109,7 +112,7 @@
 
             <div style="float:right;">
                 <a href="/eregister/student/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Save student</button>
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update Book</button>
             </div>
         </fieldset>
     </form>
@@ -117,7 +120,6 @@
 
 <footer class="footer">
     <div class="container">
-        <span class="text-muted"></span>
         <span style="float:right;" class="text-muted">&copy; August 2019</span>
     </div>
 </footer>

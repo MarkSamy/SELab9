@@ -1,39 +1,132 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
-<html>
-<head><title>Add a Student</title></head>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="O. Kalu">
+    <link rel="icon" href="favicon.ico">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
+    <studentNumber>eregister - system</studentNumber>
+</head>
 <body>
-<form action="add" method="post">
-    <table>
-        <tr>
-            <td>Student Number:</td>
-            <td><input type="text" name="studentNumber" value="${student.studentNumber}" /> </td>
-        </tr>
-        <tr>
-            <td>First Name:</td>
-            <td><input type="text" name="firstName" value="${student.firstName}" /> </td>
-        </tr>
-        <tr>
-            <td>Middle Name:</td>
-            <td><input type="text" name="middleName" value="${student.middleName}" /> </td>
-        </tr>
-        <tr>
-            <td>Last Name:</td>
-            <td><input type="text" name="lastName" value="${student.lastName}" /> </td>
-        </tr>
-        <tr>
-            <td>cgpa:</td>
-            <td><input type="double" name="cgpa" value="${student.cgpa}" /> </td>
-        </tr>
-<!--        <tr>-->
-<!--            <td>Date of enrollment:</td>-->
-<!--            <td><input type="datetime-local" name="dateOfEnrollment" value="${student.dateOfEnrollment}" /> </td>-->
-<!--        </tr>-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a style="padding-right: 2em;" class="navbar-brand" href="/eregister/home">eregister</a>
 
-    </table>
-    <input type="submit" value="update"/>
-</form>
-<form action="delete?carId=${car.id}" method="post">
-    <button type="submit">Delete</button>
-</form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="border-left: white 1px solid; padding-left: 2em; padding-right: 2em;">
+                <a class="nav-link" href="/eregister/student/list">Students</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div style="padding-top:1em;" class="container">
+    <div style="margin-bottom: 1em;">
+        <span style="font-size: 2em; color: #32a5e7;">New Student</span>
+    </div>
+
+    <form id="newBookForm" method="post" action="/eregister/student/add" th:object="${student}">
+        <fieldset>
+            <input type="hidden" name="id" th:value="${student.id}"/>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="studentNumber">student Number</label>
+                        <span th:if="${#fields.hasErrors('studentNumber')}" th:errors="*{studentNumber}"
+                              class="alert alert-danger"></span>
+                        <input id="studentNumber" name="studentNumber" type="number" class="form-control"
+                               th:value="${student.studentNumber}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstName">first Name</label>
+
+                        <input id="firstName" name="firstName" type="text" class="form-control" th:value="${student.firstName}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstName">middle Name</label>
+
+                        <input id="middleName" name="middleName" type="text" class="form-control" th:value="${student.middleName}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lastName">last Name</label>
+
+                        <input id="lastName" name="lastName" type="text" class="form-control" th:value="${student.lastName}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cgpa">cgpa</label>
+                        <span th:if="${#fields.hasErrors('cgpa')}" th:errors="*{cgpa}"
+                              class="alert alert-danger"></span>
+                        <input id="cgpa" name="cgpa" type="text" class="form-control"
+                               th:value="${student.cgpa}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dateOfEnrollment">date Of Enrollment</label>
+                        <span th:if="${#fields.hasErrors('dateOfEnrollment')}" th:errors="*{dateOfEnrollment}"
+                              class="alert alert-danger"></span>
+                        <input id="dateOfEnrollment" name="dateOfEnrollment" type="date" class="form-control"
+                               th:value="${student.dateOfEnrollment}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <label for="isInternational">International ?</label>
+                        <select class="form-control" id="isInternational"  th:field="*{isInternational}">
+
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div style="float:right;">
+                <a href="/eregister/student/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Save student</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted"></span>
+        <span style="float:right;" class="text-muted">&copy; August 2019</span>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 </html>

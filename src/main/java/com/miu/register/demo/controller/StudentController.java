@@ -5,8 +5,10 @@ import com.miu.register.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,12 +33,33 @@ public class StudentController {
         return "student/add";
     }
     @PostMapping(value = {"eregister/student/add"})
-    public String addStudentPost(@ModelAttribute @Valid Student student){
+    public String addStudentPost(@ModelAttribute("student") Student student){
         studentService.addStudent(student);
-        return "redirect:/eregister/student/add";
+        return "redirect:/eregister/student/list";
     }
-    @GetMapping(value = {"eregister/student/form"})
-    public String studentForm(){
-        return "student/add";
+    @GetMapping(value = {"/eregister/student/delete/{studentId}"})
+    public String deleteStudent(@PathVariable long studentId) {
+        studentService.deleteStudent(studentId);
+        return "redirect:/eregister/student/list";
+    }
+    @GetMapping(value = {"/eregister/student/edit/{studentId}"})
+    public String editStudent(@PathVariable long studentId, Model model) {
+        Student student = studentService.getStudent(studentId);
+        if (student != null) {
+            model.addAttribute("student", student);
+            return "student/edit";
+        }
+        return "student/list";
+    }
+
+    @PostMapping(value = {"/eregister/student/edit"})
+    public String updateStudent(@Valid @ModelAttribute("student") Student student,
+                                BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "student/edit";
+        }
+        studentService.addStudent(student);
+        return "redirect:/eregister/student/list";
     }
 }
